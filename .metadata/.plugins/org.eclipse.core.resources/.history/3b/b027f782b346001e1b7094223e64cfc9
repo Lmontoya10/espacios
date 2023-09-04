@@ -1,0 +1,7 @@
+package com.asignacion.espacios.serviceImp;
+
+import com.asignacion.espacios.service.IPersonaPerfil;
+
+public class PersonaPerfilImp implements IPersonaPerfil {
+
+}

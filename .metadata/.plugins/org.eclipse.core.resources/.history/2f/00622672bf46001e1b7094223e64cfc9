@@ -1,0 +1,23 @@
+package com.asignacion.espacios.entity;
+
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+
+@Entity
+public class PersonaEstudiante {
+
+	@Id
+	private Integer idPersona;
+	@OneToOne @JoinColumn(name="idPersona")
+	private Persona persona;
+	
+	@ManyToOne @JoinColumn(name="idNivel")
+	private MaeGrupoLista maeGrupoListaNivel;
+	
+	
+}

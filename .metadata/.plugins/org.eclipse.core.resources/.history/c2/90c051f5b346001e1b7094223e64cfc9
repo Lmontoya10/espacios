@@ -1,0 +1,5 @@
+package com.asignacion.espacios.service;
+
+public interface IPersonaPerfilService {
+
+}

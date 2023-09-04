@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:insert="layout/head :: head"></head>
+<!-- esta hoja contiene todos los estilos do bootstrap 4.5.3-->
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+
+<body class="sb-nav-fixed">
+	<header th:insert="layout/layout :: layout"></header>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_content">
+			<h5 class="container hidden" id="containerLoader">
+				<header th:insert="layout/loader :: loader"></header>
+				<main>
+					<br>
+					<br>
+					<br>
+					<br>
+
+					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
+					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
+					<div th:if="${msgD != null}" class='alert alert-danger' th:text="${msgD}" role='alert'></div>
+
+					<div class="card mb-10" style="max-width: 700px;">
+						<div class="row no-gutters">
+							<div class="col-md-3 text-center">
+								<img type="image/png" th:src="@{/imagenesGenerales/moduloIcon.png}" class="card-img"
+									alt="Crear Modulo">
+								Crear Modulo
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">
+									<h5 class="card-title">
+										<div class="card">
+											<div class="card-body">
+												<form th:action="@{/modulo/guardarModulo}" th:object="${Modulo}"
+													method="POST" id="formModulo" autocomplete="off">
+													<input type"hidden" th:field="*{idModulo}">
+													<input type"hidden" th:field="*{fechaCreacion}">
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group input-group-sm">
+																<label><strong>Codigo</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{codigo}" id="codigo"
+																	placeholder="Codigo" autocomplete="off">
+																<div class="invalid-feedback">
+																	Ingrese el codigo
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-6">
+															<div class="form-group input-group-sm">
+																<label><strong>Cantidad de Puestos</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{cantidadPuestos}" id="cantidadPuestos"
+																	placeholder="Cantidad de Puestos" autocomplete="off"
+																	value="">
+																<div class="invalid-feedback">
+																	Ingrese la cantidad de puestos
+																</div>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="form-group input-group-sm">
+																<label><strong>Consecutivo Inicial</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{consecutivoInicial}"
+																	id="consecutivoInicial"
+																	placeholder="Consecutivo Inicial" autocomplete="off"
+																	value="">
+																<div class="invalid-feedback">
+																	Ingrese el consecutivo inicial
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<input th:field="*{indHabilitado}" id="indHabilitado"
+															type="checkbox" data-toggle="toggle" data-on="Si"
+															data-off="No" data-onstyle="success" data-offstyle="danger">
+														<label for="indHabilitado">
+															<h6>Modulo Habilitado</h6>
+														</label>
+													</div>
+													<hr>
+													<div class="text text-center"
+														sec:authorize="hasAnyAuthority('Admin','ADMINISTRADOR','PROVEEDOR')">
+														<span>
+															<!--
+															<button type="button" class="btn btn-success"
+																id="btnGuardar"
+																onclick="guardarInformacion('formProveedor')">
+																<span class="" role="status" aria-hidden="true"
+																	id="spnSpinner"></span><i class="fas fa-save"
+																	aria-hidden="true"></i>
+																Guardar
+															</button>
+															-->
+															<button type="submit"
+																class="btn btn-success">Guardar</button>
+															<span><a th:href="@{/modulo/listarModulos}"
+																	class="btn btn-danger"><i
+																		class="fas fa-arrow-left"></i>
+																	Cancelar</a></span>
+														</span>
+													</div>
+
+												</form>
+
+
+											</div>
+										</div>
+
+
+								</div>
+							</div>
+						</div>
+
+
+				</main>
+		</div>
+	</div>
+	</div>
+
+	<footer class="bg-blue-pet text-center">
+		<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
+		<br>
+	</footer>
+
+
+
+</body>
+
+</html>
