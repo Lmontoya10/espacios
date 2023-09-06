@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:insert="layout/head :: head"></head>
+<!-- esta hoja contiene todos los estilos do bootstrap 4.5.3-->
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+
+<body class="sb-nav-fixed">
+	<header th:insert="layout/layout :: layout"></header>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_content">
+			<h5 class="container hidden" id="containerLoader">
+				<header th:insert="layout/loader :: loader"></header>
+				<main>
+					<br>
+					<br>
+					<br>
+					<br>
+
+					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
+					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
+					<div th:if="${msgD != null}" class='alert alert-danger' th:text="${msgD}" role='alert'></div>
+
+					<div class="card mb-10" style="max-width: 700px;">
+						<div class="row no-gutters">
+							<div class="col-md-3 text-center">
+								<img type="image/png" th:src="@{/imagenesGenerales/auxiliarIcon.png}" class="card-img"
+									alt="Crear Auxiliar">
+								Crear Auxiliar
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">
+									<h5 class="card-title">
+										<div class="card">
+											<div class="card-body">
+												<form th:action="@{/persona/guardarPersonaAuxiliar}" th:object="${Persona}"
+													method="POST" id="formAuxiliar" autocomplete="off">
+													
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group input-group-sm">
+																<label><strong>Documento</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{identificacion}" id="identificacion"
+																	placeholder="Documento" autocomplete="off">
+																<div class="invalid-feedback">
+																	Ingrese el numero de documento
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-6">
+															<div class="form-group input-group-sm">
+																<label><strong>Primer Nombre</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{primerNombre}" id="primerNombre"
+																	placeholder="Primer Nombre" autocomplete="off"
+																	value="">
+																<div class="invalid-feedback">
+																	Ingrese el primer nombre
+																</div>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="form-group input-group-sm">
+																<label><strong>Segundo Nombre</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{segundoNombre}" id="segundoNombre"
+																	placeholder="Segundo Nombre" autocomplete="off"
+																	value="">
+																<div class="invalid-feedback">
+																	Ingrese el segundo nombre
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-6">
+															<div class="form-group input-group-sm">
+																<label><strong>Primer Apellido</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{primerApellido}" id="primerApellido"
+																	placeholder="Primer Apellido" autocomplete="off"
+																	value="">
+																<div class="invalid-feedback">
+																	Ingrese el primer apellido
+																</div>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="form-group input-group-sm">
+																<label><strong>Segundo Apellido</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{segundoApellido}" id="segundoApellido"
+																	placeholder="Segundo Apellido" autocomplete="off"
+																	value="">
+																<div class="invalid-feedback">
+																	Ingrese el número de identificación
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group input-group-sm">
+																<label><strong>Email</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{email}" id="email" placeholder="email"
+																	autocomplete="off" value="">
+																<div class="invalid-feedback">
+																	Ingrese el email
+																</div>
+															</div>
+														</div>
+													</div>
+													<hr>
+													<div class="row ">
+														<div class="col-sm-12 text-center">
+															<!--
+															<button type="button" class="btn btn-success" id="btnGuardar" onclick="guardarInformacion('formEstudiante')">
+																<span class="" role="status" aria-hidden="true"
+																	id="spnSpinner"></span><i class="fas fa-save" aria-hidden="true"></i>
+																Guardar
+															</button>
+															-->
+
+															<button type="submit"
+																class="btn btn-success">Guardar</button>
+
+															<span><a th:href="@{/persona/listarPersonaAuxiliar}"
+																	class="btn btn-danger"><i
+																		class="fas fa-arrow-left"></i>
+																	Cancelar</a></span>
+														</div>
+													</div>
+												</form>
+
+
+											</div>
+										</div>
+
+
+								</div>
+							</div>
+						</div>
+
+
+				</main>
+		</div>
+	</div>
+	</div>
+
+	<footer class="bg-blue-pet text-center">
+		<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
+		<br>
+	</footer>
+
+
+
+</body>
+
+</html>

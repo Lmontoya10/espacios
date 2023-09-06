@@ -1,0 +1,15 @@
+html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div id="footer" th:>
+		<footer class="bg-blue-pet text-center">
+			<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
+			<br>
+		</footer>
+
+	</div>
+</body>
+
+</html>

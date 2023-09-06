@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:insert="layout/head :: head"></head>
+<!-- esta hoja contiene todos los estilos do bootstrap 4.5.3-->
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+
+<body class="sb-nav-fixed">
+	<header th:insert="layout/layout :: layout"></header>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_content">
+			<h5 class="container hidden" id="containerLoader">
+				<header th:insert="layout/loader :: loader"></header>
+				<div class="card-title text-center">
+					<h3>
+						Puesto
+					</h3>
+
+				</div>
+				<main>
+					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
+					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
+					<div th:if="${msgD != null}" class='alert alert-danger' th:text="${msgD}" role='alert'></div>
+
+
+
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col align-self-end">
+									<h5> <a th:href="@{/modulo/crearModulo}"
+											class="btn btn-primary float-right ">Nuevo</a>
+									</h5>
+								</div>
+							</div>
+							<table class="table table-hover" id="tblDatos">
+								<thead class="thead-blue-pet">
+									<tr>
+										<th class="col-2">Codigo</th>
+										<th class="col-3">Cantidad Puestos</th>
+										<th class="col-3">Consecutivo Inicial</th>
+										<th class="col-1">Estado</th>
+										<th class="col-2">Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="tempListaModulos : ${listaModulos}">
+										<td th:text="${tempListaModulos.codigo}"></td>
+										<td th:text="${tempListaModulos.cantidadPuestos}"></td>
+										<td th:text="${tempListaModulos.consecutivoInicial}"></td>
+										<td th:if="${tempListaModulos.indHabilitado==true}"
+											class="bg-success badge text-white">Activo</td>
+										<td th:unless="${tempListaModulos.indHabilitado==true}"
+											class="bg-danger badge text-white">Inacttivo</td>
+										<td>
+											<h5> <a th:href="@{/modulo/editarModulo/{TempIdModulo} (TempIdModulo = ${tempListaModulos.idModulo})}"
+													class="btn btn-primary float-right ">Editar</a></h5>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+
+
+				</main>
+		</div>
+	</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#tblDatos').DataTable
+				(
+					{
+						"iDisplayLength": 10,
+						"ordering": true,
+						"stateSave": true
+					}
+				);
+		});
+	</script>
+	<div class="footer" text><p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p></div>
+</body>
+
+</html>

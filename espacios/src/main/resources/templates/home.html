@@ -84,7 +84,7 @@
 						</div>
 						<div class="col " sec:authorize="hasAnyAuthority('Admin')">
 							<div class="card">
-								<a th:href="@{/}" class="text-center">
+								<a th:href="@{/puesto/listarPuesto}" class="text-center">
 									<img class="rounded mx-auto d-block" th:src="@{/imagenesGenerales/puestoIcono.png}"
 										alt="imagen no encotrada">
 								</a>
@@ -170,89 +170,12 @@
 							</div>
 						</div>
 					</div>
-					<!-- cards anteriores 
-					<div class="row row-cols-1 row-cols-md-5">
-
-						<div class="col mb-4" sec:authorize="hasAnyAuthority('Admin','ADMINISTRADOR','VENTA')">
-							<div class="card bg-info h-100">
-								<div class="card-header text-center text-white"><strong>VENTAS</strong></div>
-								<div class="card-body">
-									<a th:href="@{/}" class="text-center">
-										<img class="rounded mx-auto  d-block card-img-top"
-											th:src="@{/imagenesGenerales/venta.png}" alt="imagen no encotrada">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col mb-4" sec:authorize="hasAnyAuthority('Admin','ADMINISTRADOR','CLIENTE')">
-							<div class="card bg-info h-100">
-								<div class="card-header text-center text-white"><strong>CLIENTES</strong></div>
-								<div class="card-body">
-									<a th:href="@{/}" class="text-center">
-										<img class="rounded mx-auto  d-block" th:src="@{/imagenesGenerales/cliente.png}"
-											alt="imagen no encotrada">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col mb-4" sec:authorize="hasAnyAuthority('Admin','ADMINISTRADOR','PROVEEDOR')">
-							<div class="card bg-info h-100">
-								<div class="card-header text-center text-white"><strong>PROVEEDORES</strong></div>
-								<div class="card-body">
-									<a th:href="@{/proveedor/inicio}" class="text-center">
-										<img class="rounded mx-auto d-block "
-											th:src="@{/imagenesGenerales/proveedor.png}" alt="imagen no encotrada"
-											width="220" height="220">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col mb-4"
-							sec:authorize="hasAnyAuthority('ADMINISTRADOR','ADMINISTRADOR','INVENTARIO')">
-							<div class="card bg-info h-100">
-								<div class="card-header text-center text-white"><strong>INVENTARIO</strong></div>
-								<div class="card-body">
-									<a th:href="@{/}" class="text-center">
-										<img class="rounded mx-auto d-block "
-											th:src="@{/imagenesGenerales/inventario.png}" alt="imagen no encotrada">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col mb-4" sec:authorize="hasAnyAuthority('Admin','ADMINISTRADOR','INFORME')">
-							<div class="card bg-info h-100">
-								<div class="card-header text-center text-white"><strong>INFORMES</strong></div>
-								<div class="card-body">
-									<a th:href="@{/}" class="text-center">
-										<img class="rounded mx-auto d-block " th:src="@{/imagenesGenerales/informe.png}"
-											alt="imagen no encotrada">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="col mb-4"
-							sec:authorize="hasAnyAuthority('SUPERUSUARIO','ADMINISTRADOR','ESTADISTICA')">
-							<div class="card bg-info h-100">
-								<div class="card-header text-center text-white"><strong>ESTADISTICAS</strong></div>
-								<div class="card-body">
-									<a th:href="@{/}" class="text-center">
-										<img class="rounded mx-auto d-block "
-											th:src="@{/imagenesGenerales/estadistica.png}" alt="imagen no encotrada">
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					-->
 				</main>
 			</div>
 		</div>
 	</div>
 
-	<footer class="bg-blue-pet text-center">
-		<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
-		<br>
-	</footer>
+	<div class="footer" text><p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p></div>
 
 	<script type="application/javascript">
 		function getIP(json) {

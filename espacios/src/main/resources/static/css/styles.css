@@ -67,6 +67,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+  position: relative;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -503,6 +504,17 @@ mark,
 .figure-caption {
   font-size: 90%;
   color: #6c757d;
+}
+
+.footer{
+  background-color: #002438;
+  padding: 1em 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 40px;
+
 }
 
 code {
@@ -4389,7 +4401,7 @@ input[type=button].btn-block {
 }
 
 .card {
-  position: relative;
+  position: initial;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -4398,6 +4410,10 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  width: auto;
+  margin: auto;
+  margin-top: 10px;
+  
 }
 .card > hr {
   margin-right: 0;

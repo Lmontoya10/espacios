@@ -40,20 +40,18 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="tempListaPersona : ${listaPersonas}">
-										<td th:text="${tempListaPersona.identificacion}"></td>
+									<tr th:each="tempListaAuxiliar : ${listaPersonaPerfilAuxiliar}">
+										<td th:text="${tempListaAuxiliar.persona.identificacion}"></td>
 										<td
-											th:text="${tempListaPersona.primerNombre + ' ' + tempListaPersona.segundoNombre }">
+											th:text="${tempListaAuxiliar.persona.primerNombre + ' ' + tempListaAuxiliar.persona.segundoNombre }">
 										</td>
-										<td th:text="${tempListaPersona.email}"></td>
-										<td>1</td>
-										<td th:if="${tempListaPersona.indHabilitado==true}"
+										<td th:text="${tempListaAuxiliar.persona.email}"></td>
+										<td th:if="${tempListaAuxiliar.persona.indHabilitado==true}"
 											class="bg-success badge text-white">Activo</td>
-										<td th:unless="${tempListaPersona.indHabilitado==true}"
+										<td th:unless="${tempListaAuxiliar.persona.indHabilitado==true}"
 											class="bg-danger badge text-white">Inacttivo</td>
-										<td>1</td>
 										<td>
-											<h5> <a th:href="@{/persona/editarPersonaAuxiliar/{TempIdPersona} (TempIdPersona = ${tempListaPersona.idPersona})}"
+											<h5> <a th:href="@{/persona/editarPersonaAuxiliar/{TempIdPersona} (TempIdPersona = ${tempListaAuxiliar.persona.idPersona})}"
 													class="btn btn-primary float-right ">Editar</a></h5>
 										</td>
 									</tr>

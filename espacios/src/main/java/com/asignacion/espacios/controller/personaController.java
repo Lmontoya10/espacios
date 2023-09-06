@@ -86,6 +86,8 @@ public class personaController {
 		return "docente/listarDocente";
 	}
 	
+	
+	
 	@GetMapping("/crearPersonaDocente")
 	public String crearPersonaDocente(Model model, Persona persona) {
 		model.addAttribute("Persona", persona);
@@ -117,10 +119,11 @@ public class personaController {
 	
 	@GetMapping("/listarPersonaAuxiliar")
 	public String listarPersonaAuxiliar(Model model) {
-		List<Persona> listaPersonas = servicePersona.listarTodos();
-		model.addAttribute("listaPersonas", listaPersonas);
+		List<PersonaPerfil> listaPersonaPerfilAuxiliar = servicePersonaPerfil.listarPerfilHabilitadoPorIdPerfil(true, 3); //3: auxiliar
+		model.addAttribute("listaPersonaPerfilAuxiliar", listaPersonaPerfilAuxiliar);
 		return "auxiliar/listarAuxiliar";
 	}
+
 	
 	@GetMapping("/crearPersonaAuxiliar")
 	public String crearPersonaAuxiliar(Model model, Persona persona) {

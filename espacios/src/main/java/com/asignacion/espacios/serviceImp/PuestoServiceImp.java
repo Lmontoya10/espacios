@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.asignacion.espacios.clases.Mensaje;
+import com.asignacion.espacios.entity.Modulo;
 import com.asignacion.espacios.entity.Puesto;
 import com.asignacion.espacios.repository.PuestoRepository;
 import com.asignacion.espacios.service.IPuestoService;
@@ -26,8 +27,7 @@ public class PuestoServiceImp implements IPuestoService {
 
 	@Override
 	public List<Puesto> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+			return repoPuesto.findAll();
 	}
 
 	@Override

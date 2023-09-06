@@ -12,11 +12,6 @@
 			<h5 class="container hidden" id="containerLoader">
 				<header th:insert="layout/loader :: loader"></header>
 				<main>
-					<br>
-					<br>
-					<br>
-					<br>
-
 					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
 					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
 					<div th:if="${msgD != null}" class='alert alert-danger' th:text="${msgD}" role='alert'></div>
@@ -35,7 +30,7 @@
 											<div class="card-body">
 												<form th:action="@{/persona/guardarPersonaAuxiliar}" th:object="${Persona}"
 													method="POST" id="formAuxiliar" autocomplete="off">
-													<input type"text" th:field="*{idPersona}">
+													<input type"hidden" th:field="*{idPersona}">
 													<div class="row">
 														<div class="col-sm-12">
 															<div class="form-group input-group-sm">
@@ -150,14 +145,7 @@
 		</div>
 	</div>
 	</div>
-
-	<footer class="bg-blue-pet text-center">
-		<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
-		<br>
-	</footer>
-
-
-
+	<div class="footer" text><p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p></div>
 </body>
 
 </html>
