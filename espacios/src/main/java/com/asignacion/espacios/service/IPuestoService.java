@@ -7,21 +7,22 @@ import com.asignacion.espacios.entity.Puesto;
 
 public interface IPuestoService {
 	// NATIVO=======================================================================================================================
-	Puesto buscarPuestoId(Integer idPuesto);
+		Puesto buscarPuestoId(Integer idPuesto);
 
-	List<Puesto> listarTodos();
+		List<Puesto> listarTodos();
 
-	void guardarPuesto(Puesto puesto);
-	
-	void guardarPuestoLista(List<Puesto> listaPuesto);
+		void guardarPuesto(Puesto puesto);
+		
+		void guardarPuestoLista(List<Puesto> listaPuesto);
 
-	Puesto guardarPuestoReturn(Puesto puesto);
+		Puesto guardarPuestoReturn(Puesto puesto);
 
-	// REPOSITORY===================================================================================================================
-	Puesto buscarPorCodigoAndModulo(String codigo, int idModulo);
+		// REPOSITORY===================================================================================================================
+		Puesto buscarPorCodigoAndModulo(String codigo, int idModulo);
 
-	// METODOS Y LOGICA=============================================================================================================
-	Mensaje guardarValidando(Puesto puesto);
+		// METODOS Y LOGICA=============================================================================================================
+		Mensaje guardarValidando(Puesto puesto);
+		
 	
 
 }

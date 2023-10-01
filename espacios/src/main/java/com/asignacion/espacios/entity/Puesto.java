@@ -66,8 +66,5 @@ public class Puesto {
 		return "Puesto [idPuesto=" + idPuesto + ", modulo=" + modulo + ", codigo=" + codigo + ", indHabilitado="
 				+ indHabilitado + ", fechaCreacion=" + fechaCreacion + "]";
 	}
-
-	
-
 	
 }

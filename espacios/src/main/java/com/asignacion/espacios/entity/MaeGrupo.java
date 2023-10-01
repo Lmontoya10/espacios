@@ -13,6 +13,7 @@ public class MaeGrupo {
 	private Integer idGrupo;
 	private String descripcion;
 	private boolean indHabilitado;
+	private boolean indEditable;
 	
 	public Integer getIdGrupo() {
 		return idGrupo;
@@ -33,9 +34,16 @@ public class MaeGrupo {
 		this.indHabilitado = indHabilitado;
 	}
 	
+	public boolean isIndEditable() {
+		return indEditable;
+	}
+	public void setIndEditable(boolean indEditable) {
+		this.indEditable = indEditable;
+	}
+	
 	public String toString() {
 		return "MaeGrupo [idGrupo=" + idGrupo + ", descripcion=" + descripcion + ", indHabilitado=" + indHabilitado
-				+ "]";
+				+ ", indEditable=" + indEditable + "]";
 	}
 	
 }

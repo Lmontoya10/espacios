@@ -47,7 +47,6 @@ public class ModuloServiceImp implements IModuloService {
 
 	@Override
 	public Modulo guardarModuloReturn(Modulo modulo) {
-		
 		modulo=repoModulo.save(modulo);
 		return modulo;
 	}
@@ -70,21 +69,28 @@ public class ModuloServiceImp implements IModuloService {
 			if(moduloExist!=null) {
 				return Mensaje.retornarMensaje(0, "msgD", "El modulo ya está registrado");
 			}
-			modulo = guardarModuloReturn(modulo);
-			List<Puesto> listaPuesto = new ArrayList<>();
-			Puesto puesto;
-			int consecutivoFinal = modulo.getConsecutivoInicial() + modulo.getCantidadPuestos();
 			
-			for (int i = modulo.getConsecutivoInicial(); i < consecutivoFinal ;i++) {
-				puesto = new Puesto();
-				puesto.setCodigo(String.valueOf(i));
-				puesto.setModulo(modulo);
-				puesto.setIndHabilitado(true);
-				puesto.setFechaCreacion(modulo.getFechaCreacion());
-				listaPuesto.add(puesto);
+			if (moduloExist==null) {
+				modulo = guardarModuloReturn(modulo);
+				List<Puesto> listaPuesto = new ArrayList<>();
+				Puesto puesto;
+				int consecutivoFinal = modulo.getConsecutivoInicial() + modulo.getCantidadPuestos();
+				
+				for (int i = modulo.getConsecutivoInicial(); i < consecutivoFinal ;i++) {
+					puesto = new Puesto();
+					puesto.setCodigo(String.valueOf(i));
+					puesto.setModulo(modulo);
+					puesto.setIndHabilitado(true);
+					puesto.setFechaCreacion(modulo.getFechaCreacion());
+					listaPuesto.add(puesto);
+				}
+				servicePuesto.guardarPuestoLista(listaPuesto);
+				return Mensaje.retornarMensaje(1, "msgS", "Registro guardado correctamente");
 			}
-			servicePuesto.guardarPuestoLista(listaPuesto);
+			
+			repoModulo.save(modulo);
 			return Mensaje.retornarMensaje(1, "msgS", "Registro guardado correctamente");
+			
 	}
 
 	

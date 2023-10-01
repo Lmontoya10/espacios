@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Modulo {
@@ -16,13 +18,26 @@ public class Modulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idModulo;
 	
+	@ManyToOne
+	@JoinColumn(name ="idOrientacion")
+	private MaeGrupoLista maeGrupoListaOrientacion;
+	
+	@ManyToOne
+	@JoinColumn(name ="idDistribucion")
+	private MaeGrupoLista maeGrupoListaDistribucion;
+	
+	@ManyToOne
+	@JoinColumn(name ="idAmbiente")
+	private Ambiente ambiente;
+
+
 	private String codigo;
 	private int cantidadPuestos;
 	private int consecutivoInicial;
 	private boolean indHabilitado;
-	private int idAmbiente;
 	private Date fechaCreacion;
 	
+
 	public Modulo() {
 		super();
 		fechaCreacion = new Date();
@@ -59,28 +74,51 @@ public class Modulo {
 	public void setIndHabilitado(boolean indHabilitado) {
 		this.indHabilitado = indHabilitado;
 	}
-	public int getIdAmbiente() {
-		return idAmbiente;
-	}
-	public void setIdAmbiente(int idAmbiente) {
-		this.idAmbiente = idAmbiente;
-	}
-	
+
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-	public String toString() {
-		return "Modulo [idModulo=" + idModulo + ", codigo=" + codigo + ", cantidadPuestos=" + cantidadPuestos
-				+ ", consecutivoInicial=" + consecutivoInicial + ", indHabilitado=" + indHabilitado + ", idAmbiente="
-				+ idAmbiente + ", fechaCreacion=" + fechaCreacion + "]";
+
+
+	public MaeGrupoLista getMaeGrupoListaOrientacion() {
+		return maeGrupoListaOrientacion;
 	}
 
-	
-	
-	
-	
+
+	public void setMaeGrupoListaOrientacion(MaeGrupoLista maeGrupoListaOrientacion) {
+		this.maeGrupoListaOrientacion = maeGrupoListaOrientacion;
+	}
+
+
+	public MaeGrupoLista getMaeGrupoListaDistribucion() {
+		return maeGrupoListaDistribucion;
+	}
+
+
+	public void setMaeGrupoListaDistribucion(MaeGrupoLista maeGrupoListaDistribucion) {
+		this.maeGrupoListaDistribucion = maeGrupoListaDistribucion;
+	}
+
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Modulo [idModulo=" + idModulo + ", maeGrupoListaOrientacion=" + maeGrupoListaOrientacion
+				+ ", maeGrupoListaDistribucion=" + maeGrupoListaDistribucion + ", ambiente=" + ambiente + ", codigo="
+				+ codigo + ", cantidadPuestos=" + cantidadPuestos + ", consecutivoInicial=" + consecutivoInicial
+				+ ", indHabilitado=" + indHabilitado + ", fechaCreacion=" + fechaCreacion + "]";
+	}
 
 }

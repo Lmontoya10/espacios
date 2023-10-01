@@ -34,23 +34,27 @@
 								<thead class="thead-blue-pet">
 									<tr>
 										<th class="col-3">Nombre Clinica</th>
-										<th class="col-3">Cae</th>
+										<th class="col-1">Cae</th>
+										<th class="col-2">Dia</th>
+										<th class="col-3">Horario</th>
 										<th class="col-1">Estado</th>
 										<th class="col-2">Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="tempListaClinica : ${listaClinicas}">
-										<td th:text="${tempListaClinica.nombre}"></td>
-										<td th:text="${tempListaClinica.maeGrupoListaCae.ordenLista}"></td>
-										<td th:if="${tempListaClinica.indHabilitado==true}"
-											class="bg-success badge text-white ">Activo</td>
-										<td th:unless="${tempListaClinica.indHabilitado==true}"
-											class="bg-danger badge text-white">Inactivo</td>
+										<td ><span th:text="${tempListaClinica.maeGrupoListaNombre.nombreLista}"> </span ></td>
+										<td ><span th:text="${tempListaClinica.maeGrupoListaCae.ordenLista}"> </span ></td>
+										<td ><span th:text="${tempListaClinica.maeGrupoListaDia.nombreLista}"> </span ></td>
+										<td ><span th:text="${tempListaClinica.maeGrupoListaHorario.nombreLista}"> </span ></td>
+										<td >
+											<span th:if="${tempListaClinica.indHabilitado==true}" class="bg-success badge text-white ">Activo</span >
+											<span th:unless="${tempListaClinica.indHabilitado==true}" class="bg-danger badge text-white ">Inactivo</span >
+										</td>
 										<td>
-											<span> <a
-													th:href="@{/clinica/editarClinica/{tempIdClinica}(tempIdClinica = ${tempListaClinica.idClinica})}"
-													class="btn btn-primary ">Editar</a></span>
+											<span> <a th:href="@{/clinica/editarClinica/{tempIdClinica}(tempIdClinica = ${tempListaClinica.idClinica})}"
+													class="btn btn-primary btn-sm">Editar</a>
+											</span>
 										</td>
 									</tr>
 								</tbody>

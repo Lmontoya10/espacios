@@ -12,10 +12,7 @@
 			<h5 class="container hidden" id="containerLoader">
 				<header th:insert="layout/loader :: loader"></header>
 				<main>
-					<br>
-					<br>
-					<br>
-					<br>
+
 
 					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
 					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
@@ -35,8 +32,8 @@
 											<div class="card-body">
 												<form th:action="@{/modulo/guardarModulo}" th:object="${Modulo}"
 													method="POST" id="formModulo" autocomplete="off">
-													<input type"hidden" th:field="*{idModulo}">
-													<input type"hidden" th:field="*{fechaCreacion}">
+													<input type="hidden" th:field="*{idModulo}">
+													<input type="hidden" th:field="*{fechaCreacion}">
 													<div class="row">
 														<div class="col-sm-12">
 															<div class="form-group input-group-sm">
@@ -46,6 +43,25 @@
 																	placeholder="Codigo" autocomplete="off">
 																<div class="invalid-feedback">
 																	Ingrese el codigo
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group">
+																<label><strong>Seleccione el ambiente
+																	</strong></label>
+																<select th:field="*{ambiente.idAmbiente}"
+																	id="idAmbiente" class="custom-select">
+																	<option th:value="${'0'}" selected>Seleccione una
+																		opción</option>
+																	<option th:each="tempLista : ${listaAmbientes}"
+																		th:value="${tempLista.idAmbiente}"
+																		th:text="${tempLista.descripcion}"></option>
+																</select>
+																<div class="invalid-feedback">
+																	Seleccione una opción
 																</div>
 															</div>
 														</div>
@@ -77,13 +93,57 @@
 															</div>
 														</div>
 													</div>
-													<div class="form-group">
-														<input th:field="*{indHabilitado}" id="indHabilitado"
-															type="checkbox" data-toggle="toggle" data-on="Si"
-															data-off="No" data-onstyle="success" data-offstyle="danger">
-														<label for="indHabilitado">
-															<h6>Modulo Habilitado</h6>
-														</label>
+													<!--Orientacion del modulo-->
+													<div class="row">
+														<div class="col-sm-6">
+															<div class="form-group">
+																<label><strong>Seleccione la orientacion
+																	</strong></label>
+																<select th:field="*{maeGrupoListaOrientacion.idLista}"
+																	id="idListaOrientacion" class="custom-select">
+																	<option th:value="${'0'}" selected>Seleccione una
+																		opción</option>
+																	<option th:each="tempLista : ${listaOrientacion}"
+																		th:value="${tempLista.idLista}"
+																		th:text="${tempLista.nombreLista}"></option>
+																</select>
+																<div class="invalid-feedback">
+																	Seleccione una opción
+																</div>
+															</div>
+														</div>
+														<!--distribucion de puestos-->
+														<div class="col-sm-6">
+															<div class="form-group">
+																<label><strong>Seleccione la distribucion
+																	</strong></label>
+																<select th:field="*{maeGrupoListaDistribucion.idLista}"
+																	id="idListaDistribucion" class="custom-select">
+																	<option th:value="${'0'}" selected>Seleccione una
+																		opción</option>
+																	<option th:each="tempLista : ${listaDistribucion}"
+																		th:value="${tempLista.idLista}"
+																		th:text="${tempLista.nombreLista}"></option>
+																</select>
+																<div class="invalid-feedback">
+																	Seleccione una opción
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group">
+																<input th:field="*{indHabilitado}" id="indHabilitado"
+																	type="checkbox" data-toggle="toggle" data-on="Si"
+																	data-off="No" data-onstyle="success"
+																	data-offstyle="danger">
+																<label for="indHabilitado">
+																	<h6>Modulo Habilitado</h6>
+																</label>
+															</div>
+														</div>
 													</div>
 													<hr>
 													<div class="text text-center"
@@ -115,7 +175,9 @@
 		</div>
 	</div>
 	</div>
-	<div class="footer" text><p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p></div>
+	<div class="footer" text>
+		<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
+	</div>
 </body>
 
 </html>

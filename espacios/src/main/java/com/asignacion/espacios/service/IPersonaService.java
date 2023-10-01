@@ -20,6 +20,6 @@ public interface IPersonaService {
 	
 	
 	//METODOS Y LOGICA=============================================================================================================
-	Mensaje guardarValidando (Persona persona);
+	Mensaje guardarValidando (Persona persona, Boolean perfilEstudiante, Boolean perfilDocente, Boolean perfilAuxiliar, Boolean perfilAdministrador);
 	
 }

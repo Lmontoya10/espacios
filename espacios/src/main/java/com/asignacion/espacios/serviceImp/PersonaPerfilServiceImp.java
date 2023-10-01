@@ -15,9 +15,23 @@ public class PersonaPerfilServiceImp implements IPersonaPerfilService {
 	@Autowired
 	PersonaPerfilRepository repoPersoPerfil;
 
+	//Nativo
+	public void guardarLista(List<PersonaPerfil> listaPersonaPerfil) {
+		repoPersoPerfil.saveAll(listaPersonaPerfil);
+	}
+	
+	
+	//Repository
 	public List<PersonaPerfil> listarPerfilHabilitadoPorIdPerfil(boolean indHabilitado, int idPerfil) {
 		return repoPersoPerfil.findByIndHabilitadoAndPerfil_IdPerfil(indHabilitado, idPerfil);
 	}
+
+	
+	public List<PersonaPerfil> listaPerfilesPersonaPorIdPersona(int idPersona) {
+		return repoPersoPerfil.listaPerfilesPersonaPorIdPersona(idPersona);
+	}
+
+	
 
 	
 }

@@ -7,5 +7,10 @@ import com.asignacion.espacios.entity.Clinica;
 
 
 public interface ClinicaRepository extends JpaRepository<Clinica, Integer> {
-	Clinica findByNombre(String nombre);
+	
+	Clinica findByMaeGrupoListaNombre_IdListaAndMaeGrupoListaCae_IdListaAndMaeGrupoListaDia_IdListaAndMaeGrupoListaHorario_IdListaAndIndHabilitado (int idListaNombre, int idListaCae, int idListaDia, int idListaHorario, boolean indHabilitado);
+	
+	
+	
+	
 }

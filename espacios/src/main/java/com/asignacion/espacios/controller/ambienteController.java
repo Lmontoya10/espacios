@@ -21,60 +21,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Modulo;
-import com.asignacion.espacios.entity.Puesto;
-import com.asignacion.espacios.service.IModuloService;
-import com.asignacion.espacios.service.IPuestoService;
+import com.asignacion.espacios.entity.Ambiente;
+
+import com.asignacion.espacios.service.IAmbienteService;
 
 @Controller
-@RequestMapping("/puesto")
-public class puestoController {
-
+@RequestMapping("/ambiente")
+public class ambienteController {
+	
 	@Autowired
-	IPuestoService servicePuesto;
-	
-
-	@Autowired
-	IModuloService serviceModulo;
+	IAmbienteService serviceAmbiente;
 
 	
-	@GetMapping("/listarPuesto")
-	public String listarPuesto(Model model) {
-		List<Puesto> listaPuestos = servicePuesto.listarTodos();
-		model.addAttribute("listaPuestos", listaPuestos);
-		return "puesto/listarPuesto";
+	@GetMapping("/listarAmbientes")
+	public String listarAmbiente(Model model) {
+		List<Ambiente> listaAmbientes = serviceAmbiente.listarTodos();
+		model.addAttribute("listaAmbientes", listaAmbientes);
+		return "ambiente/listarAmbiente";
 	}
 	
-	@GetMapping("/crearPuesto")
-	public String crearPuesto(Model model, Puesto puesto) {
-		List<Modulo> listaModulos = serviceModulo.listarTodos();
-		model.addAttribute("listaModulos",listaModulos);
-		model.addAttribute("Puesto", puesto);
-		return "puesto/crearPuesto";
-	}
-	
-	
-	@GetMapping("/editarPuesto/{idPuesto}")
-	public String editarPuesto(Model model, Puesto puesto, @PathVariable("idPuesto")int idPuesto) {
-		puesto = servicePuesto.buscarPuestoId(idPuesto);
-		model.addAttribute("Puesto", puesto);
-		List<Modulo> listaModulos = serviceModulo.listarTodos();
-	        model.addAttribute("listaModulos", listaModulos);
-		return "puesto/crearPuesto";
+	@GetMapping("/crearAmbiente")
+	public String crearAmbiente(Model model, Ambiente ambiente) {
+		model.addAttribute("Ambiente", ambiente);
+		return "ambiente/crearAmbiente";
 	}
 	
 	
-	@PostMapping("/guardarPuesto")
-	public String guardarPuesto (Model model, Puesto puesto, RedirectAttributes attributes) {
+	@GetMapping("/editarAmbiente/{idAmbiente}")
+	public String editarAmbiente(Model model, Ambiente ambiente, @PathVariable("idAmbiente")int idAmbiente) {
+		ambiente = serviceAmbiente.buscarAmbienteId(idAmbiente);
+		model.addAttribute("Ambiente", ambiente);
+		return "ambiente/crearAmbiente";
+	}
+	
+	
+	@PostMapping("/guardarAmbiente")
+	public String guardarAmbiente (Model model, Ambiente ambiente, RedirectAttributes attributes) {
 		Mensaje mensaje = new Mensaje();
-		mensaje = servicePuesto.guardarValidando(puesto);
+		mensaje = serviceAmbiente.guardarValidando(ambiente);
 		if(mensaje.getCodigoMensaje()==0) {
-			model.addAttribute("Puesto", puesto);
+			model.addAttribute("Ambiente", ambiente);
 			model.addAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-			return "puesto/crearPuesto";
+			return "ambiente/crearAmbiente";
 		}
 		attributes.addFlashAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-		return "redirect:/puesto/listarPuesto";
+		return "redirect:/ambiente/crearAmbiente";
 	}
 
 	
@@ -103,5 +94,4 @@ public class puestoController {
 		public void setGenericos(Model model, Authentication auth) {
 			
 		}
-
 }

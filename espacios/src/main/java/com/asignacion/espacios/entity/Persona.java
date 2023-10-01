@@ -1,12 +1,14 @@
 package com.asignacion.espacios.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -28,18 +30,26 @@ public class Persona {
 	private String contrasena;
 	private boolean indHabilitado;
 	
-	//Constructor
+	//===================================CONSTRUCTOR===========================================
 	public Persona() {
 		super();
 		fechaCreacion = new Date();
+		indHabilitado = true;
 	}
 	
 	
 	//========================== MAPEO OTAS ENTIDADES ===========================================
-	@OneToOne (mappedBy = "persona", fetch = FetchType.EAGER)
+	@OneToOne (mappedBy = "persona", fetch = FetchType.LAZY)
 	private PersonaEstudiante personaEstudiante;
 	
+	@OneToOne (mappedBy = "persona", fetch = FetchType.LAZY)
+	private PersonaDocente personaDocente;
 	
+	@OneToMany (mappedBy = "persona", fetch = FetchType.LAZY)
+	private List<PersonaPerfil> personaPerfil;
+	
+	
+	//===============================GET Y SET=====================================================
 	public Integer getIdPersona() {
 		return idPersona;
 	}
@@ -115,14 +125,26 @@ public class Persona {
 		this.personaEstudiante = personaEstudiante;
 	}
 	
+	public PersonaDocente getPersonaDocente() {
+		return personaDocente;
+	}
+	public void setPersonaDocente(PersonaDocente personaDocente) {
+		this.personaDocente = personaDocente;
+	}
+	public List<PersonaPerfil> getPersonaPerfil() {
+		return personaPerfil;
+	}
+	public void setPersonaPerfil(List<PersonaPerfil> personaPerfil) {
+		this.personaPerfil = personaPerfil;
+	}
+	
 	public String toString() {
 		return "Persona [idPersona=" + idPersona + ", identificacion=" + identificacion + ", primerNombre="
 				+ primerNombre + ", segundoNombre=" + segundoNombre + ", primerApellido=" + primerApellido
 				+ ", segundoApellido=" + segundoApellido + ", email=" + email + ", fechaCreacion=" + fechaCreacion
 				+ ", usuario=" + usuario + ", contrasena=" + contrasena + ", indHabilitado=" + indHabilitado
-				+ ", personaEstudiante=" + personaEstudiante + "]";
+				+ ", personaEstudiante=" + personaEstudiante + ", personaDocente=" + personaDocente + "]";
 	}
-	
 	
 	
 }

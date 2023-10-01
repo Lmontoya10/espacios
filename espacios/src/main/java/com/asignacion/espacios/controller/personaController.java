@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
@@ -41,44 +42,76 @@ public class personaController {
 	@Autowired
 	IPersonaPerfilService servicePersonaPerfil;
 	
-	//*********************ESTUDIANTE*************************************//
-
-	@GetMapping("/listarPersonaEstudiante")
+	@GetMapping("/listarTodasPersonas")
 	public String listarPersonaEstudiante(Model model) {
-		List<PersonaPerfil> listaPersonaPerfilEstudiante = servicePersonaPerfil.listarPerfilHabilitadoPorIdPerfil(true, 1); //1: Estaduante
-		model.addAttribute("listaPersonaPerfilEstudiante", listaPersonaPerfilEstudiante);
-		return "estudiante/listarEstudiante";
+		List<Persona> listarTodasPersonas = servicePersona.listarTodos();
+		model.addAttribute("listarTodasPersonas", listarTodasPersonas);
+		return "persona/listarPersona";
 	}
 	
-	@GetMapping("/crearPersonaEstudiante")
+	@GetMapping("/crearPersona")
 	public String crearPersonaEstudiante(Model model, Persona persona) {
 		model.addAttribute("Persona", persona);
-		return "estudiante/crearEstudiante";
+		return "persona/crearPersona";
 	}
 	
-	@GetMapping("/editarPersonaEstudiante/{idPersona}")
+	@GetMapping("/editarPersona/{idPersona}")
 	public String editarPersonaEstudiante(Model model, Persona persona, @PathVariable("idPersona")int idPersona) {
+		//Creo objetos y vairables
+		Boolean perfilEstudiante = false;
+		Boolean perfilDocente = false;
+		Boolean perfilAuxiliar = false;
+		Boolean perfilAdminsitrador = false;
+		//Consulto la persona
 		persona = servicePersona.buscarPersonaId(idPersona);
 		model.addAttribute("Persona", persona);
-		return "estudiante/crearEstudiante";
+		//Consulto los perfiles
+		List<PersonaPerfil> listaPersonaPerfil = servicePersonaPerfil.listaPerfilesPersonaPorIdPersona(idPersona);
+		for (PersonaPerfil lista :listaPersonaPerfil) {
+			if(lista.getPerfil().getIdPerfil()==1) {
+				perfilEstudiante = lista.isIndHabilitado();
+			}else if(lista.getPerfil().getIdPerfil()==2) {
+				perfilDocente = lista.isIndHabilitado();
+			}else if(lista.getPerfil().getIdPerfil()==3) {
+				perfilAuxiliar = lista.isIndHabilitado();
+			}else if(lista.getPerfil().getIdPerfil()==4) {
+				perfilAdminsitrador = lista.isIndHabilitado();
+			}
+		}
+		model.addAttribute("perfilEstudiante", perfilEstudiante);
+		model.addAttribute("perfilDocente", perfilDocente);
+		model.addAttribute("perfilAuxiliar", perfilAuxiliar);
+		model.addAttribute("perfilAdminsitrador", perfilAdminsitrador);
+		return "persona/crearPersona";
 	}
 	
 	@PostMapping("/guardarPersonaEstudiante")
-	public String guardarPersonaEstudiante (Model model, Persona persona, RedirectAttributes attributes) {
+	public String guardarPersonaEstudiante (Model model, Persona persona, RedirectAttributes attributes, 
+			@RequestParam(value="perfilEstudiante", defaultValue =  "false") Boolean perfilEstudiante,
+			@RequestParam(value="perfilDocente", defaultValue =  "false") Boolean perfilDocente,
+			@RequestParam(value="perfilAuxiliar", defaultValue =  "false") Boolean perfilAuxiliar,
+			@RequestParam(value="perfilAdminsitrador", defaultValue =  "false") Boolean perfilAdminsitrador) {
+		//Declaro variables y objetos
 		Mensaje mensaje = new Mensaje();
-		mensaje = servicePersona.guardarValidando(persona);
+		//Guardo el objeto persona con los otros objetos matepados
+		mensaje = servicePersona.guardarValidando(persona, perfilEstudiante, perfilDocente, perfilAuxiliar, perfilAdminsitrador);
 		if(mensaje.getCodigoMensaje()==0) {
 			model.addAttribute("Persona", persona);
 			model.addAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-			return "estudiante/crearEstudiante";
+			return "persona/crearPersona";
 		}
 		attributes.addFlashAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-		return "redirect:/persona/listarPersonaEstudiante";
+		model.addAttribute("Persona", persona);
+		//return "persona/crearPersona";
+		return "redirect:/persona/listarTodasPersonas";
 	}
+	
+	
+	
+	
+	
+	
 		
-	
-	//*********************DOCENTE*************************************//
-	
 	@GetMapping("/listarPersonaDocente")
 	public String listarPersonaDocente(Model model) {
 		List<PersonaPerfil> listaPersonaPerfilDocente = servicePersonaPerfil.listarPerfilHabilitadoPorIdPerfil(true, 2); //2: Docente
@@ -86,85 +119,22 @@ public class personaController {
 		return "docente/listarDocente";
 	}
 	
-	
-	
-	@GetMapping("/crearPersonaDocente")
-	public String crearPersonaDocente(Model model, Persona persona) {
-		model.addAttribute("Persona", persona);
-		return "docente/crearDocente";
-	}
-	
-	@GetMapping("/editarPersonaDocente/{idPersona}")
-	public String editarPersonaDocente(Model model, Persona persona, @PathVariable("idPersona")int idPersona) {
-		persona = servicePersona.buscarPersonaId(idPersona);
-		model.addAttribute("Persona", persona);
-		return "docente/crearDocente";
-	}
-	
-	
-	@PostMapping("/guardarPersonaDocente")
-	public String guardarPersonaDocente (Model model, Persona persona, RedirectAttributes attributes) {
-		Mensaje mensaje = new Mensaje();
-		mensaje = servicePersona.guardarValidando(persona);
-		if(mensaje.getCodigoMensaje()==0) {
-			model.addAttribute("Persona", persona);
-			model.addAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-			return "estudiante/crearDocente";
-		}
-		attributes.addFlashAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-		return "redirect:/persona/listarPersonaDocente";
-	}
-	
-	//*********************AUXILIAR*************************************//
-	
 	@GetMapping("/listarPersonaAuxiliar")
 	public String listarPersonaAuxiliar(Model model) {
 		List<PersonaPerfil> listaPersonaPerfilAuxiliar = servicePersonaPerfil.listarPerfilHabilitadoPorIdPerfil(true, 3); //3: auxiliar
 		model.addAttribute("listaPersonaPerfilAuxiliar", listaPersonaPerfilAuxiliar);
 		return "auxiliar/listarAuxiliar";
 	}
-
-	
-	@GetMapping("/crearPersonaAuxiliar")
-	public String crearPersonaAuxiliar(Model model, Persona persona) {
-		model.addAttribute("Persona", persona);
-		return "auxiliar/crearAuxiliar";
-	}
-	
-	@GetMapping("/editarPersonaAuxiliar/{idPersona}")
-	public String editarPersonaAuxiliar(Model model, Persona persona, @PathVariable("idPersona")int idPersona) {
-		persona = servicePersona.buscarPersonaId(idPersona);
-		model.addAttribute("Persona", persona);
-		return "auxiliar/crearAuxiliar";
-	
-	}
-	
-	@PostMapping("/guardarPersonaAuxiliar")
-	public String guardarPersonaAuxiliar (Model model, Persona persona, RedirectAttributes attributes) {
-		Mensaje mensaje = new Mensaje();
-		mensaje = servicePersona.guardarValidando(persona);
-		if(mensaje.getCodigoMensaje()==0) {
-			model.addAttribute("Persona", persona);
-			model.addAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-			return "estudiante/crearDocente";
-		}
-		attributes.addFlashAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-		return "redirect:/persona/listarPersonaDocente";
-	}
 	
 	
-	
-	
-	// ************ NECESARIOS PARA TRABAJAR DE FORMA GENERAL DENTRO DE TODO EL
-	// CONTROLADOR**************
-	// InitBinder para String si los detecta vacios el data Binding los settea a
-	// Null
+	// ************ NECESARIOS PARA TRABAJAR DE FORMA GENERAL DENTRO DE TODO EL CONTROLADOR**************
+	// InitBinder para String si los detecta vacios el data Binding los settea a Null
 	@InitBinder
 	public void InitBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 	}
 
-	// InitBinder para boleanos null los settea a falso
+	// InitBinder para booleanos null los settea a falso
 	@InitBinder
 	public void IniBinderBoolean(WebDataBinder dataBinder) {
 		dataBinder.registerCustomEditor(Boolean.class, new CustomBooleanEditor(false));
@@ -182,6 +152,8 @@ public class personaController {
 	public void setGenericos(Model model, Authentication auth) {
 		List<MaeGrupoLista> listaCAE = serviceIMaeGrupoLista.listaOpcionesHabilitadasPorIdGrupoOrdenadosOrden(2);
 	    model.addAttribute("listaCAE", listaCAE);
+	    List<MaeGrupoLista> listaEspecialidadDocente = serviceIMaeGrupoLista.listaOpcionesHabilitadasPorIdGrupoOrdenadosOrden(4);
+	    model.addAttribute("listaEspecialidadDocente", listaEspecialidadDocente);
 
 	}
 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:insert="layout/head :: head"></head>
+<body class="sb-nav-fixed">
+	<header th:insert="layout/layout :: layout"></header>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_content">
+			<h5 class="container-fluid hidden" id="containerLoader">
+				<div class="card-title text-center">
+					<h3>
+						Usuarios y personas
+					</h3>
+				</div>
+				<header th:insert="layout/loader :: loader"></header>
+				<main>
+					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
+					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
+					<div th:if="${msgD != null}" class='alert alert-danger' th:text="${msgD}" role='alert'></div>
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col align-self-end">
+									<h5> <a th:href="@{/persona/crearPersona}"
+											class="btn btn-primary float-right ">Nuevo</a></h5>
+								</div>
+							</div>
+							<div class="table-responsive no-padding">
+							<table class="table table-hover table-sm" id="tblDatos">
+								<thead class="thead-blue-pet">
+									<tr>
+										<th class="col-sm-2">Documento</th>
+										<th class="col-sm-3">Nombre</th>
+										<th class="col-sm-2">Correo</th>
+										<th class="col-sm-1">Estado</th>
+										<th class="col-sm-1">CAE</th>
+										<th class="col-sm-2">Perfiles</th>
+										<th class="col-sm-1">Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="tempListarTodasPersonas : ${listarTodasPersonas}">
+										<td th:text="${tempListarTodasPersonas.identificacion}"></td>
+										<td
+											th:text="${tempListarTodasPersonas.primerNombre + ' ' + tempListarTodasPersonas.segundoNombre + ' ' + tempListarTodasPersonas.primerApellido + ' ' + tempListarTodasPersonas.segundoApellido}">
+										</td>
+										<td th:text="${tempListarTodasPersonas.email}"></td>
+										<td >
+											<span th:if="${tempListarTodasPersonas.indHabilitado==true}" class="bg-success badge text-white" > Activo </span >
+											<span th:unless="${tempListarTodasPersonas.indHabilitado==true}" class="bg-danger badge text-white" > Inactivo</span >
+										</td>
+										<td >
+											<span th:if="${tempListarTodasPersonas.personaEstudiante != null}" 
+											th:text="${tempListarTodasPersonas.personaEstudiante.maeGrupoListaNivel.ordenLista}" class="bg-secondary badge text-white" > Activo </span >
+										</td>
+										<td >
+											<span th:each="tempListaPerfilesPersona: ${tempListarTodasPersonas.personaPerfil}">
+												<span th:if="${tempListaPerfilesPersona.indHabilitado==true}"
+													  th:text="${tempListaPerfilesPersona.perfil.descripcion}" class="bg-info badge text-white ">
+												</span >
+											</span >
+										</td >
+										<td>
+											<span>
+												<a th:href="@{/persona/editarPersona/{tempIdPersona}(tempIdPersona = ${tempListarTodasPersonas.idPersona})}"
+													class="btn btn-primary btn-sm">Editar</a>
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+
+				</main>
+		</div>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#tblDatos').DataTable
+				(
+					{
+						"iDisplayLength": 10,
+						"ordering": true,
+						"stateSave": true
+					}
+				);
+		});
+	</script>
+<div class="footer" text><p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p></div>
+</body>
+
+</html>

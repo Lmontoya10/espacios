@@ -21,45 +21,27 @@
 						<div class="row no-gutters">
 							<div class="col-md-3 text-center">
 								<img type="image/png" th:src="@{/imagenesGenerales/puestoIcono.png}" class="card-img"
-									alt="Crear Modulo">
-								Crear Puesto
+									alt="Crear Ambiente">
+								Crear Ambiente
 							</div>
 							<div class="col-md-9">
 								<div class="card-body">
 									<h5 class="card-title">
 										<div class="card">
 											<div class="card-body">
-												<form th:action="@{/puesto/guardarPuesto}" th:object="${Puesto}"
-													method="POST" id="formPuesto" autocomplete="off">
-													<input type = "hidden" th:field="*{idPuesto}">
+												<form th:action="@{/ambiente/guardarAmbiente}" th:object="${Ambiente}"
+													method="POST" id="formAmbiente" autocomplete="off">
+													<input type = "hidden" th:field="*{idAmbiente}">
 													<input type = "hidden" th:field="*{fechaCreacion}">
 													<div class="row">
 														<div class="col-sm-12">
 															<div class="form-group input-group-sm">
-																<label><strong>Codigo</strong></label>
+																<label><strong>Descripcion</strong></label>
 																<input type="text" class="form-control"
-																	th:field="*{codigo}" id="codigo"
-																	placeholder="Codigo" autocomplete="off" readonly>
+																	th:field="*{descripcion}" id="descripcion"
+																	placeholder="Descripcion" autocomplete="off">
 																<div class="invalid-feedback">
-																	Ingrese el codigo
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-sm-12">
-															<div class="form-group">
-																<label><strong>Seleccione el Modulo </strong></label>
-																<select th:field="*{modulo.idModulo}"
-																	id="idModulo" class="custom-select">
-																	<option th:value="${'0'}" selected>Seleccione una
-																		opción</option>
-																	<option th:each="tempLista : ${listaModulos}"
-																		th:value="${tempLista.idModulo}"
-																		th:text="${tempLista.codigo}"></option>
-																</select>
-																<div class="invalid-feedback">
-																	Seleccione una opción
+																	Ingrese el nombre del ambiente
 																</div>
 															</div>
 														</div>
@@ -72,19 +54,19 @@
 																	data-off="No" data-onstyle="success"
 																	data-offstyle="danger">
 																<label for="indHabilitado">
-																	<h6>Modulo Habilitado</h6>
+																	<h6>Ambiente Habilitado</h6>
 																</label>
 															</div>
 														</div>
 													</div>
 													<hr>
 													<div class="text text-center"
-														sec:authorize="hasAnyAuthority('Admin','ADMINISTRADOR','PROVEEDOR')">
+														sec:authorize="hasAnyAuthority('Admin')">
 														<span>
 
 															<button type="submit"
 																class="btn btn-success">Guardar</button>
-															<span><a th:href="@{/puesto/listarPuesto}"
+															<span><a th:href="@{/ambiente/listarAmbientes}"
 																	class="btn btn-danger"><i
 																		class="fas fa-arrow-left"></i>
 																	Cancelar</a></span>
