@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:insert="layout/head :: head"></head>
+<!-- esta hoja contiene todos los estilos do bootstrap 4.5.3-->
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+
+<body class="sb-nav-fixed">
+	<header th:insert="layout/layout :: layout"></header>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_content">
+			<h5 class="container hidden" id="containerLoader">
+				<header th:insert="layout/loader :: loader"></header>
+				<main>
+
+					<div th:if="${msgW != null}" class='alert alert-warning' th:text="${msgW}" role='alert'></div>
+					<div th:if="${msgS != null}" class='alert alert-success' th:text="${msgS}" role='alert'></div>
+					<div th:if="${msgD != null}" class='alert alert-danger' th:text="${msgD}" role='alert'></div>
+
+					<div class="card mb-10" style="max-width: 700px;">
+						<div class="row no-gutters">
+							<div class="col-md-3 text-center">
+								<img type="image/png" th:src="@{/imagenesGenerales/puestoIcono.png}" class="card-img"
+									alt="Crear Ambiente">
+								Crear Ambiente
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">
+									<h5 class="card-title">
+										<div class="card">
+											<div class="card-body">
+												<form th:action="@{/ambiente/guardarAmbiente}" th:object="${Ambiente}"
+													method="POST" id="formAmbiente" autocomplete="off">
+													<input type = "hidden" th:field="*{idAmbiente}">
+													<input type = "hidden" th:field="*{fechaCreacion}">
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group input-group-sm">
+																<label><strong>Descripcion</strong></label>
+																<input type="text" class="form-control"
+																	th:field="*{descripcion}" id="descripcion"
+																	placeholder="Descripcion" autocomplete="off">
+																<div class="invalid-feedback">
+																	Ingrese el nombre del ambiente
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group">
+																<input th:field="*{indHabilitado}" id="indHabilitado"
+																	type="checkbox" data-toggle="toggle" data-on="Si"
+																	data-off="No" data-onstyle="success"
+																	data-offstyle="danger">
+																<label for="indHabilitado">
+																	<h6>Ambiente Habilitado</h6>
+																</label>
+															</div>
+														</div>
+													</div>
+													<hr>
+													<div class="text text-center"
+														sec:authorize="hasAnyAuthority('Admin')">
+														<span>
+
+															<button type="submit"
+																class="btn btn-success">Guardar</button>
+															<span><a th:href="@{/ambiente/listarAmbientes}"
+																	class="btn btn-danger"><i
+																		class="fas fa-arrow-left"></i>
+																	Cancelar</a></span>
+														</span>
+													</div>
+
+												</form>
+
+
+											</div>
+										</div>
+
+
+								</div>
+							</div>
+						</div>
+
+
+				</main>
+		</div>
+	</div>
+	</div>
+	<div class="footer" text>
+		<p class="text-white">Programación de Ambientes de Prácticas Odontológicas</p>
+	</div>
+</body>
+
+</html>
