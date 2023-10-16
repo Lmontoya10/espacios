@@ -23,6 +23,13 @@ public class Ambiente {
 		fechaCreacion = new Date();
 	}
 
+	public Ambiente(String descripcion, Date fechaCreacion, boolean indHabilitado) {
+		super();
+		this.descripcion = descripcion;
+		this.fechaCreacion = fechaCreacion;
+		this.indHabilitado = indHabilitado;
+	}
+
 	public Integer getIdAmbiente() {
 		return idAmbiente;
 	}

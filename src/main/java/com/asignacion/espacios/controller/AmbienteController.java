@@ -35,7 +35,7 @@ public class AmbienteController {
 	
 	@GetMapping("/listarAmbientes")
 	public String listarAmbiente(Model model) {
-		List<Ambiente> listaAmbientes = serviceAmbiente.listarTodos();
+		List<AmbienteDTO> listaAmbientes = serviceAmbiente.listarTodos();
 		model.addAttribute("listaAmbientes", listaAmbientes);
 		return "ambiente/listarAmbiente";
 	}
@@ -47,16 +47,16 @@ public class AmbienteController {
 	}
 	
 	
-	@GetMapping("/editarAmbiente/{idAmbiente}")
-	public String editarAmbiente(Model model, Ambiente ambiente, @PathVariable("idAmbiente")int idAmbiente) {
-		ambiente = serviceAmbiente.buscarAmbienteId(idAmbiente);
-		model.addAttribute("Ambiente", ambiente);
-		return "ambiente/crearAmbiente";
-	}
+//	@GetMapping("/editarAmbiente/{idAmbiente}")
+//	public String editarAmbiente(Model model, Ambiente ambiente, @PathVariable("idAmbiente")int idAmbiente) {
+//		ambiente = serviceAmbiente.buscarAmbienteId(idAmbiente);
+//		model.addAttribute("Ambiente", ambiente);
+//		return "ambiente/crearAmbiente";
+//	}
 	
 	
 	@PostMapping("/guardarAmbiente")
-	public String guardarAmbiente (Model model, Ambiente ambiente, RedirectAttributes attributes) {
+	public String guardarAmbiente (Model model, AmbienteDTO ambiente, RedirectAttributes attributes) {
 		Mensaje mensaje = new Mensaje();
 		mensaje = serviceAmbiente.guardarValidando(ambiente);
 		if(mensaje.getCodigoMensaje()==0) {

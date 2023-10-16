@@ -29,7 +29,7 @@ import com.asignacion.espacios.service.IMaeGrupoListaService;
 
 @Controller
 @RequestMapping("/clinica")
-public class clinicaController {
+public class ClinicaController {
 	
 	@Autowired
 	IClinicaService serviceClinica;
