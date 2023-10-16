@@ -9,10 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Persona;
-import com.asignacion.espacios.entity.PersonaDocente;
-import com.asignacion.espacios.entity.PersonaEstudiante;
-import com.asignacion.espacios.entity.PersonaPerfil;
+import com.asignacion.espacios.model.entity.Persona;
+import com.asignacion.espacios.model.entity.PersonaDocente;
+import com.asignacion.espacios.model.entity.PersonaEstudiante;
+import com.asignacion.espacios.model.entity.PersonaPerfil;
 import com.asignacion.espacios.repository.PersonaRepository;
 import com.asignacion.espacios.service.IPersonaDocenteService;
 import com.asignacion.espacios.service.IPersonaEstudianteService;

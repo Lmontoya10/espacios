@@ -1,7 +1,7 @@
 package com.asignacion.espacios.service;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.PersonaEstudiante;
+import com.asignacion.espacios.model.entity.PersonaEstudiante;
 
 public interface IPersonaEstudianteService {
 

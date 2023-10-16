@@ -2,7 +2,7 @@ package com.asignacion.espacios.service;
 
 import java.util.List;
 
-import com.asignacion.espacios.entity.MaeGrupoLista;
+import com.asignacion.espacios.model.entity.MaeGrupoLista;
 
 public interface IMaeGrupoListaService {
 

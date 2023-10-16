@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Clinica;
+import com.asignacion.espacios.model.entity.Clinica;
 import com.asignacion.espacios.repository.ClinicaRepository;
 import com.asignacion.espacios.service.IClinicaService;
 

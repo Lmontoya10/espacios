@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Ambiente;
-import com.asignacion.espacios.entity.MaeGrupoLista;
-import com.asignacion.espacios.entity.Modulo;
+import com.asignacion.espacios.model.entity.Ambiente;
+import com.asignacion.espacios.model.entity.MaeGrupoLista;
+import com.asignacion.espacios.model.entity.Modulo;
 import com.asignacion.espacios.service.IAmbienteService;
 import com.asignacion.espacios.service.IMaeGrupoListaService;
 import com.asignacion.espacios.service.IModuloService;

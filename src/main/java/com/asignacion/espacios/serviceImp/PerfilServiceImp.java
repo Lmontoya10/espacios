@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.asignacion.espacios.entity.Perfil;
+import com.asignacion.espacios.model.entity.Perfil;
 import com.asignacion.espacios.repository.PerfilRepository;
 import com.asignacion.espacios.service.IPerfilService;
 

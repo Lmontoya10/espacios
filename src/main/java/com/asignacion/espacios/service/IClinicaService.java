@@ -3,7 +3,7 @@ package com.asignacion.espacios.service;
 import java.util.List;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Clinica;
+import com.asignacion.espacios.model.entity.Clinica;
 
 public interface IClinicaService {
 

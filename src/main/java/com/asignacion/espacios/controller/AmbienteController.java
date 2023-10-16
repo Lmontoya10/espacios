@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Ambiente;
-
+import com.asignacion.espacios.model.dto.AmbienteDTO;
+import com.asignacion.espacios.model.entity.Ambiente;
 import com.asignacion.espacios.service.IAmbienteService;
 
 @Controller
 @RequestMapping("/ambiente")
-public class ambienteController {
+public class AmbienteController {
 	
 	@Autowired
 	IAmbienteService serviceAmbiente;
@@ -41,7 +41,7 @@ public class ambienteController {
 	}
 	
 	@GetMapping("/crearAmbiente")
-	public String crearAmbiente(Model model, Ambiente ambiente) {
+	public String crearAmbiente(Model model, AmbienteDTO ambiente) {
 		model.addAttribute("Ambiente", ambiente);
 		return "ambiente/crearAmbiente";
 	}
