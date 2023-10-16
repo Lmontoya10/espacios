@@ -1,4 +1,4 @@
-package com.asignacion.espacios.entity;
+package com.asignacion.espacios.model.entity;
 
 
 import javax.persistence.Entity;

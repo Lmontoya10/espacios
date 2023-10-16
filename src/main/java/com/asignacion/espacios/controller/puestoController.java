@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Modulo;
-import com.asignacion.espacios.entity.Puesto;
+import com.asignacion.espacios.model.entity.Modulo;
+import com.asignacion.espacios.model.entity.Puesto;
 import com.asignacion.espacios.service.IModuloService;
 import com.asignacion.espacios.service.IPuestoService;
 

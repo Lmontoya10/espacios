@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.asignacion.espacios.entity.MaeGrupoLista;
+import com.asignacion.espacios.model.entity.MaeGrupoLista;
 import com.asignacion.espacios.repository.MaeGrupoListaRepository;
 import com.asignacion.espacios.service.IMaeGrupoListaService;
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.PersonaEstudiante;
+import com.asignacion.espacios.model.entity.PersonaEstudiante;
 import com.asignacion.espacios.repository.PersonaEstudianteRepository;
 import com.asignacion.espacios.service.IPersonaEstudianteService;
 

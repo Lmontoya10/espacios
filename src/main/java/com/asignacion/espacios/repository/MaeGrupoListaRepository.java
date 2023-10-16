@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.asignacion.espacios.entity.MaeGrupoLista;
+import com.asignacion.espacios.model.entity.MaeGrupoLista;
 
 public interface MaeGrupoListaRepository extends JpaRepository<MaeGrupoLista, Integer> {
 

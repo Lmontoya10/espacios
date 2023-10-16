@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.entity.Clinica;
-import com.asignacion.espacios.entity.MaeGrupoLista;
+import com.asignacion.espacios.model.entity.Clinica;
+import com.asignacion.espacios.model.entity.MaeGrupoLista;
 import com.asignacion.espacios.service.IClinicaService;
 import com.asignacion.espacios.service.IMaeGrupoListaService;
 
