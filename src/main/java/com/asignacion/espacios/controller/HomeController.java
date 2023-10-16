@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class homeController {
+public class HomeController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;

@@ -31,7 +31,7 @@ import com.asignacion.espacios.service.IPersonaService;
 
 @Controller
 @RequestMapping("/persona")
-public class personaController {
+public class PersonaController {
 
 	@Autowired
 	IPersonaService servicePersona;

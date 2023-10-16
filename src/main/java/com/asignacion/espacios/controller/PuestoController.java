@@ -1,6 +1,5 @@
 package com.asignacion.espacios.controller;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,66 +21,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asignacion.espacios.clases.Mensaje;
-import com.asignacion.espacios.model.entity.Ambiente;
-import com.asignacion.espacios.model.entity.MaeGrupoLista;
 import com.asignacion.espacios.model.entity.Modulo;
-import com.asignacion.espacios.service.IAmbienteService;
-import com.asignacion.espacios.service.IMaeGrupoListaService;
+import com.asignacion.espacios.model.entity.Puesto;
 import com.asignacion.espacios.service.IModuloService;
-
+import com.asignacion.espacios.service.IPuestoService;
 
 @Controller
-@RequestMapping("/modulo")
-public class moduloController {
+@RequestMapping("/puesto")
+public class PuestoController {
+
+	@Autowired
+	IPuestoService servicePuesto;
 	
+
 	@Autowired
 	IModuloService serviceModulo;
-	
-	@Autowired
-	IMaeGrupoListaService serviceIMaeGrupoLista;
-	
-	@Autowired
-	IAmbienteService serviceAmbiente;
-
 
 	
-	@GetMapping("/listarModulos")
-	public String listarModulos(Model model) {
+	@GetMapping("/listarPuesto")
+	public String listarPuesto(Model model) {
+		List<Puesto> listaPuestos = servicePuesto.listarTodos();
+		model.addAttribute("listaPuestos", listaPuestos);
+		return "puesto/listarPuesto";
+	}
+	
+	@GetMapping("/crearPuesto")
+	public String crearPuesto(Model model, Puesto puesto) {
 		List<Modulo> listaModulos = serviceModulo.listarTodos();
-		model.addAttribute("listaModulos", listaModulos);
-		System.out.println("moduloController.listarModulos()");
-		return "modulo/listarModulos";
-	}
-	
-	@GetMapping("/crearModulo")
-	public String crearModulo(Model model, Modulo modulo) {
-		// List<Ambiente>listaAmbiente = serviceAmbiente.listarTodos();
-		// model.addAttribute("listaAmbiente", listaAmbiente);
-		model.addAttribute("Modulo", modulo);
-		return "modulo/crearModulo";
-	}
-	
-	@GetMapping("/editarModulo/{idModulo}")
-	public String editarModulo(Model model, Modulo modulo, @PathVariable("idModulo")int idModulo) {
-		modulo = serviceModulo.buscarModuloId(idModulo);
-		model.addAttribute("Modulo", modulo);
-		// List<Ambiente>listaAmbiente = serviceAmbiente.listarTodos();
-		// model.addAttribute("listaAmbientes", listaAmbiente);
-		return "modulo/crearModulo";
+		model.addAttribute("listaModulos",listaModulos);
+		model.addAttribute("Puesto", puesto);
+		return "puesto/crearPuesto";
 	}
 	
 	
-	@PostMapping("/guardarModulo")
-	public String guardarModulo (Model model, Modulo modulo, RedirectAttributes attributes) {
+	@GetMapping("/editarPuesto/{idPuesto}")
+	public String editarPuesto(Model model, Puesto puesto, @PathVariable("idPuesto")int idPuesto) {
+		puesto = servicePuesto.buscarPuestoId(idPuesto);
+		model.addAttribute("Puesto", puesto);
+		List<Modulo> listaModulos = serviceModulo.listarTodos();
+	        model.addAttribute("listaModulos", listaModulos);
+		return "puesto/crearPuesto";
+	}
+	
+	
+	@PostMapping("/guardarPuesto")
+	public String guardarPuesto (Model model, Puesto puesto, RedirectAttributes attributes) {
 		Mensaje mensaje = new Mensaje();
-		mensaje = serviceModulo.guardarValidando(modulo);
+		mensaje = servicePuesto.guardarValidando(puesto);
 		if(mensaje.getCodigoMensaje()==0) {
-			model.addAttribute("Modulo", modulo);
+			model.addAttribute("Puesto", puesto);
 			model.addAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-			return "modulo/crearModulo";
+			return "puesto/crearPuesto";
 		}
 		attributes.addFlashAttribute(mensaje.getTipoAlerta(), mensaje.getDescripcionMensaje());
-		return "redirect:/modulo/listarModulos";
+		return "redirect:/puesto/listarPuesto";
 	}
 
 	
@@ -108,14 +101,7 @@ public class moduloController {
 		//Listar maestras
 		@ModelAttribute
 		public void setGenericos(Model model, Authentication auth) {
-			  List<MaeGrupoLista> listaOrientacion = serviceIMaeGrupoLista.listaOpcionesHabilitadasPorIdGrupoOrdenadosOrden(3);
-			    model.addAttribute("listaOrientacion", listaOrientacion);
-			    List<MaeGrupoLista> listaDistribucion = serviceIMaeGrupoLista.listaOpcionesHabilitadasPorIdGrupoOrdenadosOrden(8);
-			    model.addAttribute("listaDistribucion", listaDistribucion);
-			    List<Ambiente> listaAmbientes = serviceAmbiente.listarTodos();
-			    model.addAttribute("listaAmbientes", listaAmbientes);
-	
+			
 		}
-	
-	
+
 }
